@@ -1,0 +1,13 @@
+add
+S44
+34
+2
+19
+3.2
+вечер
+пять
+нет
+info
+execute_script Script1.txt
+show
+history
