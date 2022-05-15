@@ -7,3 +7,9 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 /test/
+../image
+../client/target
+../common/target
+../server/target
+../Script.txt
+../Script1.txt
