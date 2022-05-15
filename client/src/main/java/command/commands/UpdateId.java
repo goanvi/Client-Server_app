@@ -10,6 +10,7 @@ import request.Request;
 import response.Response;
 import utility.Asker;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class UpdateId extends AbstractCommand {
@@ -58,8 +59,7 @@ public class UpdateId extends AbstractCommand {
                         break;
                     }
                 }
-                String out = parameters.toString().replaceAll("\\[]", "");
-                System.out.println(out);
+                String out = Arrays.toString(parameters).replaceAll("[\\[\\]]", "");
                 Request request = new Request(groupDTO,"update_id", argument + "," + out);
                 communicate.send(request);
                 Response response = communicate.get();

@@ -8,7 +8,6 @@ import model.Exceptions.IncorrectNameEnumException;
 import request.Request;
 import response.Response;
 import view.command.AbstractCommand;
-import view.console.ConsoleClient;
 import view.exceptions.IncorrectInputException;
 
 import java.util.ArrayList;
@@ -22,45 +21,15 @@ public class UpdateId extends AbstractCommand {
         this.collectionManager = collectionManager;
     }
 
-//    private boolean setNewParameters(StudyGroup studyGroup)throws IncorrectScriptException{
-//        try {
-//            ConsoleClient.println("Какие параметры группы вы хотите изменить?\n" +
-//                    "Имя\n" +
-//                    "Координаты\n" +
-//                    "Количество студентов\n" +
-//                    "Средняя оценка\n" +
-//                    "Форма обучения\n" +
-//                    "Семестр\n" +
-//                    "Админ группы");
-//            ConsoleClient.println("Запишите все изменяемые параметры в строчку через запятую");
-//            String[] parameters = consoleClient.readLine().split(",");
-//            return asker.changeParameters(parameters, studyGroup);
-//        } catch (NoSuchElementException exception){
-//            ConsoleClient.printError("Значение поля не распознано!");
-//            if (Asker.getFileMode()) throw new IncorrectScriptException();
-//        } catch (IllegalStateException exception) {
-//            ConsoleClient.printError("Непредвиденная ошибка!");
-//            System.exit(0);
-//        }
-//        return false;
-//    }
-
     @Override
     public Response execute(Request request) {
         try {
-//                ConsoleClient.println("Введите id элемента, которого вы хотите изменить:");
-////                if (Asker.getFileMode()){
-////                    Scanner scriptScanner = ConsoleClient.getScriptScanner();
-////                    input = scriptScanner.nextLine().trim();
-////                }else input = scanner.nextLine().trim();
             String[] params = request.getArgument().split(",");
             Integer inputInt = Integer.parseInt(params[0].trim());
-            if (!IdManager.containsStudyGroupID(inputInt))
-                throw new IncorrectInputException();
+            if (!IdManager.containsStudyGroupID(inputInt)) throw new IncorrectInputException();
             StudyGroup studyGroup = collectionManager.getByID(inputInt);
             ArrayList<String> parameters = new ArrayList<>(Arrays.asList(params));
             parameters.remove(0);
-            System.out.println(parameters);
             for (String parameter : parameters) {
                 switch (parameter.toLowerCase().trim()) {
                     case "имя":
@@ -95,30 +64,13 @@ public class UpdateId extends AbstractCommand {
                 }
             }
             return new Response(true, "Параметры элемента успешно изменены!");
-//            while (true){
-//                if (setNewParameters(group)) {
-//                    ConsoleClient.println("Параметры элемента успешно изменены!");
-//                    return true;
-//                }
-//            }
         } catch (EmptyCollectionException exception) {
-            ConsoleClient.printError("Коллекция пуста!");
             return new Response(true, "Коллекция пуста!");//Не уверен, что так должно быть. Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
         } catch (IncorrectInputException exception) {
-            ConsoleClient.printError("Такого id не существует!");
-            return new Response(false, "Такого id не существует!");
+            return new Response(false, "Введенные данные некорректны!");
         } catch (IncorrectNameEnumException e) {
             return new Response(false,"Данные введены некорректно!");
         }
-//        catch (NoSuchElementException exception){
-//            ConsoleClient.printError("Значение поля не распознано!");
-//            if (Asker.getFileMode()) throw new IncorrectScriptException();
-//        } catch (IllegalStateException exception) {
-//            ConsoleClient.printError("Непредвиденная ошибка!");
-//            System.exit(0);
-//        }
-//        return false;
-
     }
 
     public String getMessage(){

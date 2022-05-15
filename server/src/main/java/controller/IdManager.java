@@ -57,8 +57,11 @@ public class IdManager {
         idStudyGroupBuffer.remove(id);
     }
 
-
     public static int changeId (int id){
         return id + (int)((Math.random()*1000)+1);
+    }
+
+    public static Set<Integer> getIdStudyGroupBuffer() {
+        return idStudyGroupBuffer;
     }
 }
