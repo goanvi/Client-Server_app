@@ -1,6 +1,7 @@
 package client;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -17,6 +18,8 @@ public class Connect {
     public void connect(){
         try {
             socket = new Socket(address,port);
+        } catch (ConnectException exception){
+
         } catch (IOException e) {
             e.printStackTrace();
         }

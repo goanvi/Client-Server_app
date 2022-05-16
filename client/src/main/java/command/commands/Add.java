@@ -1,5 +1,6 @@
 package command.commands;
 
+import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -9,6 +10,8 @@ import exceptions.IncorrectScriptException;
 import request.Request;
 import response.Response;
 import utility.Asker;
+
+import java.net.SocketException;
 
 public class Add extends AbstractCommand {
     private Asker asker;
@@ -22,6 +25,7 @@ public class Add extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) throws IncorrectScriptException {
+        Request request = null;
         try{
             if (argument.isEmpty()){
                 StudyGroupDTO groupDTO = new StudyGroupDTO(
@@ -32,7 +36,7 @@ public class Add extends AbstractCommand {
                         asker.askFromOfEducation(),
                         asker.askSemester(),
                         asker.askPerson());
-                Request request = new Request(groupDTO, "add", null);
+                request = new Request(groupDTO, "add", null);
                 communicate.send(request);
                 Response response = communicate.get();
                 ConsoleClient.println("\n"+response.getText()+"\n");
@@ -43,6 +47,13 @@ public class Add extends AbstractCommand {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
+        }catch (SocketException exception){
+            Client.waitingConnection();
+            try {
+                communicate.send(request);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }

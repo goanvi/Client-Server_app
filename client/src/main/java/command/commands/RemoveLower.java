@@ -1,5 +1,6 @@
 package command.commands;
 
+import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -10,6 +11,7 @@ import request.Request;
 import response.Response;
 import utility.Asker;
 
+import java.net.SocketException;
 import java.util.NoSuchElementException;
 
 public class RemoveLower extends AbstractCommand {
@@ -24,6 +26,7 @@ public class RemoveLower extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) throws IncorrectScriptException {
+        Request request = null;
         try {
             if (argument.isEmpty()) {
                 StudyGroupDTO group = new StudyGroupDTO(
@@ -34,18 +37,20 @@ public class RemoveLower extends AbstractCommand {
                         asker.askFromOfEducation(),
                         asker.askSemester(),
                         asker.askPerson());
-                Request request = new Request(group, "remove_lower", null);
+                request = new Request(group, "remove_lower", null);
                 communicate.send(request);
                 Response response = communicate.get();
                 ConsoleClient.println(response.getText());
-//                collectionManager.removeLower(group);
-//                ConsoleClient.println("Все элементы меньше заданного удалены!");
                 return response.getAnswer();
             } else throw new WrongCommandInputException();
-//        } catch (EmptyCollectionException exception) {
-//            ConsoleClient.printError("Коллекция пуста!");
-//            return true;//Не уверен, что так должно быть. Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
-        } catch (WrongCommandInputException exception) {
+        }catch (SocketException exception){
+            Client.waitingConnection();
+            try {
+                communicate.send(request);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
+        }catch (WrongCommandInputException exception) {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();

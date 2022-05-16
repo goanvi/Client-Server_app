@@ -1,3 +1,4 @@
+import client.Client;
 import client.Communicate;
 import client.Connect;
 import command.AbstractCommand;
@@ -14,34 +15,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            Connect connect = new Connect(InetAddress.getLocalHost(), 5000);
-            connect.connect();
-            Communicate communicate = new Communicate(connect.getSocket());
-            System.out.println(connect.getSocket().isConnected());
-            Map<String , AbstractCommand> commandMap = new HashMap<>();
-            CommandManager commandManager = new CommandManager(commandMap);
-            ConsoleClient consoleClient = new ConsoleClient(commandManager, System.console(), new Scanner(System.in));
-            Asker asker = new Asker(consoleClient);
-            commandMap.put("add", new Add(asker, communicate));
-            commandMap.put("exit", new Exit(communicate));
-            commandMap.put("execute_script" , new ExecuteScript(consoleClient));
-            commandMap.put("clear", new Clear(communicate));
-            commandMap.put("filter_less_than_students_count", new FilterLessThanStudentsCount(communicate));
-            commandMap.put("help", new Help(communicate));
-            commandMap.put("history", new History(communicate));
-            commandMap.put("info",new Info(communicate));
-            commandMap.put("remove_any_by_semester_enum", new RemoveAnyBySemesterEnum(communicate));
-            commandMap.put("remove_by_id", new RemoveById(communicate));
-            commandMap.put("remove_greater", new RemoveGreater(asker, communicate));
-            commandMap.put("remove_lower", new RemoveLower(asker,communicate));
-            commandMap.put("show", new Show(communicate));
-            commandMap.put("sum_of_students_count", new SumOfStudentsCount(communicate));
-            commandMap.put("update_id", new UpdateId(asker,communicate, consoleClient));
-            consoleClient.interactiveMode();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        Client client = new Client();
+        client.start();
 //        Socket socket;
 //        int port = 5000;
 //        try {

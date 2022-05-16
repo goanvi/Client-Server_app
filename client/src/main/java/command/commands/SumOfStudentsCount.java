@@ -1,5 +1,6 @@
 package command.commands;
 
+import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -8,6 +9,8 @@ import exceptions.IncorrectScriptException;
 import request.Request;
 import response.Response;
 import utility.Asker;
+
+import java.net.SocketException;
 
 public class SumOfStudentsCount extends AbstractCommand {
     Communicate communicate;
@@ -19,9 +22,10 @@ public class SumOfStudentsCount extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) throws IncorrectScriptException {
+        Request request =null;
         try{
             if (argument.isEmpty()){
-                Request request = new Request(null,"sum_of_students_count", null);
+                request = new Request(null,"sum_of_students_count", null);
                 communicate.send(request);
                 Response response = communicate.get();
                 ConsoleClient.println(response.getText());
@@ -29,6 +33,13 @@ public class SumOfStudentsCount extends AbstractCommand {
 //                ConsoleClient.println("Количество студентов успешно выведено!");
                 return response.getAnswer();
             }else throw new WrongCommandInputException();
+        }catch (SocketException exception){
+            Client.waitingConnection();
+            try {
+                communicate.send(request);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
         }catch (WrongCommandInputException exception){
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");

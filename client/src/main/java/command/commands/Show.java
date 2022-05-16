@@ -1,5 +1,6 @@
 package command.commands;
 
+import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -8,6 +9,8 @@ import exceptions.IncorrectScriptException;
 import request.Request;
 import response.Response;
 import utility.Asker;
+
+import java.net.SocketException;
 
 public class Show extends AbstractCommand {
     Communicate communicate;
@@ -26,6 +29,7 @@ public class Show extends AbstractCommand {
 //    }
     @Override
     public boolean execute(String argument) throws IncorrectScriptException {
+        Request request = null;
         try {
             if (argument.isEmpty()) {
 //                TreeSet<StudyGroup> studyGroups = collectionManager.getCollection();
@@ -35,7 +39,7 @@ public class Show extends AbstractCommand {
 //                for (StudyGroup group:studyGroups){
 //                    System.out.println(Formatter.format(group));
 //                }
-                Request request = new Request(null, "show", null);
+                request = new Request(null, "show", null);
                 communicate.send(request);
                 Response response = communicate.get();
                 ConsoleClient.println(response.getText());
@@ -43,6 +47,13 @@ public class Show extends AbstractCommand {
 //                }
                 return response.getAnswer();
             } else throw new WrongCommandInputException();
+        }catch (SocketException exception){
+            Client.waitingConnection();
+            try {
+                communicate.send(request);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
         } catch (WrongCommandInputException exception) {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");

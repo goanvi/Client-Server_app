@@ -1,5 +1,6 @@
 package command.commands;
 
+import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -10,6 +11,7 @@ import response.Response;
 import utility.Asker;
 import utility.exceptions.IncorrectNameEnumException;
 
+import java.net.SocketException;
 import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
@@ -24,7 +26,7 @@ public class RemoveAnyBySemesterEnum extends AbstractCommand {
 
     @Override
     public boolean execute(String argument) throws IncorrectScriptException {
-        Request request;
+        Request request = null;
         try{
             if (!argument.isEmpty()){
                 if (Pattern.matches("(три)|(пять)|(семь)",argument.trim())) System.out.println("работает");
@@ -42,6 +44,13 @@ public class RemoveAnyBySemesterEnum extends AbstractCommand {
                 ConsoleClient.println(response.getText());
                 return response.getAnswer();
             }else throw new WrongCommandInputException();
+        }catch (SocketException exception){
+            Client.waitingConnection();
+            try {
+                communicate.send(request);
+            } catch (SocketException e) {
+                e.printStackTrace();
+            }
         }catch (WrongCommandInputException exception){
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
