@@ -7,13 +7,26 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.SocketException;
 import java.nio.channels.SocketChannel;
 
 public class Communicate {
     SocketChannel socket;
+    ObjectInput ois;
+    ObjectOutputStream oos;
 
     public Communicate (SocketChannel socket) {
         this.socket = socket;
+        try {
+            oos = new ObjectOutputStream(socket.socket().getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            ois = new ObjectInputStream(socket.socket().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Request getRequest (){
@@ -30,9 +43,11 @@ public class Communicate {
 //                buffer[i] = buf.get();
 //            }
 //            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buf.array());
-            ObjectInput ois = new ObjectInputStream(socket.socket().getInputStream());
+//            ObjectInput ois = new ObjectInputStream(socket.socket().getInputStream());
             request = (Request) ois.readObject();
-        } catch (IOException e) {
+        }catch (SocketException e){
+
+        }catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -44,11 +59,15 @@ public class Communicate {
 //        ByteBuffer buf = ByteBuffer.allocate(1000);
         try {
 //            ByteArrayOutputStream stream = new ByteArrayOutputStream(1000);
-            ObjectOutputStream oos = new ObjectOutputStream(socket.socket().getOutputStream());
+//            ObjectOutputStream oos = new ObjectOutputStream(socket.socket().getOutputStream());
             oos.writeObject(response);
             oos.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public SocketChannel getSocket() {
+        return socket;
     }
 }

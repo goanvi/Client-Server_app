@@ -48,14 +48,16 @@ public class RemoveGreater extends AbstractCommand {
 //        }catch (EmptyCollectionException exception){
 //            ConsoleClient.printError("Коллекция пуста!");
 //            return true;//Не уверен, что так должно быть. Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
-        }catch (SocketException exception){
-            Client.waitingConnection();
-            try {
-                communicate.send(request);
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
-        }catch (WrongCommandInputException exception){
+        }
+//        catch (SocketException exception){
+//            Client.waitingConnection();
+//            try {
+//                communicate.send(request);
+//            } catch (SocketException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        catch (WrongCommandInputException exception){
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();

@@ -39,14 +39,16 @@ public class Clear extends AbstractCommand {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (SocketException exception){
-            Client.waitingConnection();
-            try {
-                communicate.send(request);
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
-        }catch (NoSuchElementException exception){
+        }
+//        catch (SocketException exception){
+//            Client.waitingConnection();
+//            try {
+//                communicate.send(request);
+//            } catch (SocketException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        catch (NoSuchElementException exception){
             ConsoleClient.printError("Значение поля не распознано!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
         } catch (IllegalStateException exception) {

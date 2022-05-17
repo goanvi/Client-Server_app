@@ -13,7 +13,7 @@ public class Exit extends AbstractCommand {
     public Response execute(Request request){
 
 
-
+            System.exit(0);
 //            ConsoleClient.println("Выход из программы успешно выполнен!");
 //            return true;
 //

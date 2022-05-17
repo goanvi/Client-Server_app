@@ -5,6 +5,7 @@ import response.Response;
 import view.command.AbstractCommand;
 import view.command.commands.History;
 
+import java.net.SocketException;
 import java.util.Map;
 
 public class CommandManager {
@@ -16,7 +17,8 @@ public class CommandManager {
         this.commands = commands;
     }
 
-    public Response callCommand(Request request){
+    public Response callCommand(Request request) throws SocketException{
+        if (request==null) throw new SocketException("Client is disconnected");
         Response response = commands.get(request.getName()).execute(request);
         if (response.getAnswer()) History.addToHistory(request.getName());
         return response;

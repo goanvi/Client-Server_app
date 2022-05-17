@@ -1,14 +1,18 @@
 import controller.CollectionManager;
 import controller.CommandManager;
 import controller.FileWorker;
+import request.Request;
+import response.Response;
 import server.Communicate;
 import server.Connect;
 import server.Start;
 import view.command.AbstractCommand;
 import view.command.commands.*;
 
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
@@ -30,6 +34,7 @@ public class Main {
         commandMap.put("history", new History());
         commandMap.put("exit", new Save(collectionManager,fileWorker));
         commandMap.put("info",new Info(collectionManager));
+        commandMap.put("exit1", new Exit());
         commandMap.put("remove_any_by_semester_enum", new RemoveAnyBySemesterEnum(collectionManager));
         commandMap.put("remove_by_id", new RemoveById(collectionManager));
         commandMap.put("remove_greater", new RemoveGreater(collectionManager));
@@ -37,12 +42,35 @@ public class Main {
         commandMap.put("show", new Show(collectionManager));
         commandMap.put("sum_of_students_count", new SumOfStudentsCount(collectionManager));
         commandMap.put("update_id", new UpdateId(collectionManager));
-        Connect connect = new Connect();
-        connect.start();
-        connect.connect();
-        Communicate communicate = new Communicate(connect.getSocket());
-        Start start = new Start(communicate,commandManager);
-        start.start();
+//        Connect connect = new Connect();
+        Connect.start();
+        Connect.connect();
+        Communicate communicate = new Communicate(Connect.getSocket());
+        Scanner scanner = new Scanner(System.in);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String input = scanner.nextLine().trim();
+                if (input.equalsIgnoreCase("save"))  commandMap.get("exit").execute(null);
+                if (input.equalsIgnoreCase("exit")) {
+                    commandMap.get("exit").execute(null);
+                    commandMap.get("exit1").execute(null);
+                }
+            }
+        }).start();
+//        Start start = new Start(communicate,commandManager);
+//        start.start();
+        while (true){
+            try {
+                Request request = communicate.getRequest();
+                Response response = null;
+                response = commandManager.callCommand(request);
+                communicate.sendResponse(response);
+            } catch (SocketException e) {
+                Connect.connect();
+                communicate = new Communicate(Connect.getSocket());
+            }
+        }
 
 //        SocketChannel socket;
 //        ServerSocketChannel server;

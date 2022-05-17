@@ -11,6 +11,7 @@ import request.Request;
 import response.Response;
 import utility.Asker;
 
+import java.io.IOException;
 import java.net.SocketException;
 
 
@@ -31,20 +32,24 @@ public class Help extends AbstractCommand {
                 request = new Request(null , "help", null);
                 communicate.send(request);
                 response = communicate.get();
+                if (response==null) return false;
                 ConsoleClient.println("\n"+response.getText()+"\n");
                 return response.getAnswer();
             }
             else throw new WrongCommandInputException();
-        }catch (NullPointerException nullPointerException){
-            Client.waitingConnection();
-            response= communicate.get();
+//        }catch (NullPointerException nullPointerException){
+//            System.out.println("xnj 'nj ");
+//            Client.waitingConnection();
+//            response= communicate.get();
         }catch (WrongCommandInputException exception){
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (SocketException exception){
-            Client.waitingConnection();
         }
+//        catch (SocketException exception){
+//            System.out.println("в команде");
+//            System.out.println(exception.getMessage());
+//        }
         return false;
     }
 

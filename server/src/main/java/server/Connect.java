@@ -6,29 +6,29 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
 public class Connect {
-    SocketChannel socket;
-    ServerSocketChannel server;
-    int port = 5000;
+    static SocketChannel socket;
+    static ServerSocketChannel server;
+    static int port = 5000;
     public Connect (){}
 
-    public void start (){
+    public static void start (){
         try {
             server = ServerSocketChannel.open();
+            server.bind(new InetSocketAddress(5000));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void connect(){
+    public static void connect(){
         try {
-            server.bind(new InetSocketAddress(5000));
             socket = server.accept();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public SocketChannel getSocket() {
+    public static SocketChannel getSocket() {
         return socket;
     }
 }

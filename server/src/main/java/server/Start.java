@@ -4,6 +4,8 @@ import controller.CommandManager;
 import request.Request;
 import response.Response;
 
+import java.net.SocketException;
+
 public class Start {
     Communicate communicate;
     CommandManager commandManager;
@@ -14,9 +16,14 @@ public class Start {
 
     public void start(){
         while (true){
-            Request request = communicate.getRequest();
-            Response response = commandManager.callCommand(request);
-            communicate.sendResponse(response);
+            try {
+                Request request = communicate.getRequest();
+                Response response = null;
+                response = commandManager.callCommand(request);
+                communicate.sendResponse(response);
+            } catch (SocketException e) {
+                Connect.connect();
+            }
         }
     }
 }

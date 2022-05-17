@@ -47,14 +47,15 @@ public class Add extends AbstractCommand {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (SocketException exception){
-            Client.waitingConnection();
-            try {
-                communicate.send(request);
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
         }
+//        catch (SocketException exception){
+//            Client.waitingConnection();
+//            try {
+//                communicate.send(request);
+//            } catch (SocketException e) {
+//                e.printStackTrace();
+//            }
+//        }
         return false;
     }
 

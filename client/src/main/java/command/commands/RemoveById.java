@@ -36,14 +36,16 @@ public class RemoveById extends AbstractCommand {
 //        }catch (IncorrectInputException exception){
 //            ConsoleClient.printError("Такого id не существует!");
 //            if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (SocketException exception){
-            Client.waitingConnection();
-            try {
-                communicate.send(request);
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
-        }catch (WrongCommandInputException exception){
+        }
+//        catch (SocketException exception){
+//            Client.waitingConnection();
+//            try {
+//                communicate.send(request);
+//            } catch (SocketException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        catch (WrongCommandInputException exception){
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
