@@ -12,7 +12,7 @@ public class Add extends AbstractCommand {
     private CollectionManager collectionManager;
 
     public Add (CollectionManager collectionManager){
-        super("add", "Добавляет новый элемент в коллекцию");
+        super("add", "добавляет новый элемент в коллекцию");
         this. collectionManager = collectionManager;
     }
 

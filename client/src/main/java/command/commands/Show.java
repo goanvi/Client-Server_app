@@ -42,7 +42,7 @@ public class Show extends AbstractCommand {
                 request = new Request(null, "show", null);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println(response.getText());
+                ConsoleClient.println("\n"+response.getText());
 //                ConsoleClient.println("Коллекция успешно выведена!");
 //                }
                 return response.getAnswer();

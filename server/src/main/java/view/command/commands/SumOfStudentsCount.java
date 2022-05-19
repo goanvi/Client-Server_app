@@ -10,7 +10,7 @@ public class SumOfStudentsCount extends AbstractCommand {
     CollectionManager collectionManager;
 
     public SumOfStudentsCount(CollectionManager collectionManager) {
-        super("Sum_of_students_count", "Выводит сумму значений поля studentsCount для всех элементов коллекции");
+        super("sum_of_students_count", "выводит сумму значений поля studentsCount для всех элементов коллекции");
         this.collectionManager = collectionManager;
     }
 

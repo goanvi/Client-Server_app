@@ -11,7 +11,7 @@ public class Info extends AbstractCommand {
     CollectionManager collectionManager;
 
     public Info(CollectionManager manager) {
-        super("Info", "Выводит в стандартный поток вывода информацию о коллекции" +
+        super("info", "выводит в стандартный поток вывода информацию о коллекции" +
                 " (тип, дата инициализации, количество элементов и т.д.)");
         this.collectionManager = manager;
     }

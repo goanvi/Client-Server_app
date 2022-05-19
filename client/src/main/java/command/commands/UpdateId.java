@@ -66,7 +66,7 @@ public class UpdateId extends AbstractCommand {
                 request = new Request(groupDTO,"update_id", argument + "," + out);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println(response.getText());
+                ConsoleClient.println("\n"+response.getText());
                 return response.getAnswer();
 //                Integer inputInt = Integer.parseInt(argument.trim());
 //                if (!IdManager.containsStudyGroupID(inputInt))

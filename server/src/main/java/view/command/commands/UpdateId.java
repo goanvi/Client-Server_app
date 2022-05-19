@@ -17,7 +17,7 @@ public class UpdateId extends AbstractCommand {
     CollectionManager collectionManager;
 
     public UpdateId(CollectionManager collectionManager) {
-        super("Update_id", "Обновляет значение элемента коллекции, id которого равен заданному");
+        super("update_id", "обновляет значение элемента коллекции, id которого равен заданному");
         this.collectionManager = collectionManager;
     }
 

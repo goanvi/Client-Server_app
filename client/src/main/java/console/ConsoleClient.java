@@ -17,10 +17,9 @@ public class ConsoleClient {
     Deque<Scanner> scanners = new ArrayDeque<>();
     Scanner testScanner;
 
-    public ConsoleClient(CommandManager commandManager, Console console, Scanner testScanner) {
+    public ConsoleClient(CommandManager commandManager, Console console) {
         this.commandManager = commandManager;
         this.console = console;
-        this.testScanner = testScanner;//потом убрать
     }
 
     public void interactiveMode(){
@@ -82,8 +81,7 @@ public class ConsoleClient {
         if (Asker.getFileMode()){
             return scriptScanner.nextLine().trim();
         }
-        return testScanner.nextLine().trim();
-//        return getConsole().readLine().trim();
+        return getConsole().readLine().trim();
         }catch (NullPointerException exception){
             readLine();
         }

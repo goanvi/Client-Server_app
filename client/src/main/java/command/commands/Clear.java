@@ -29,7 +29,7 @@ public class Clear extends AbstractCommand {
                 request = new Request(null,"clear", null);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println("\n"+response.getText()+"\n");
+                ConsoleClient.println("\n"+response.getText());
                 //Придумать как передавать request на сервер и получать обратно response
                 return response.getAnswer();
             }

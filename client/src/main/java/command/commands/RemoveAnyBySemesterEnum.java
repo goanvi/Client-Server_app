@@ -41,7 +41,7 @@ public class RemoveAnyBySemesterEnum extends AbstractCommand {
                 }
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println(response.getText());
+                ConsoleClient.println("\n"+response.getText());
                 return response.getAnswer();
             }else throw new WrongCommandInputException();
         }

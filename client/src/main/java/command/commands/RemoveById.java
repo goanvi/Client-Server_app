@@ -29,7 +29,7 @@ public class RemoveById extends AbstractCommand {
                 request = new Request(null, "remove_by_id", argument);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println(response.getText());
+                ConsoleClient.println("\n"+response.getText());
 //                ConsoleClient.println("Элемент успешно удален!");
                 return response.getAnswer();
             }else throw new WrongCommandInputException();

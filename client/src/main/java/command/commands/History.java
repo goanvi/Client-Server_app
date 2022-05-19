@@ -28,7 +28,7 @@ public class History extends AbstractCommand {
                 request = new Request(null, "history", null);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println("\n"+response.getText()+"\n");
+                ConsoleClient.println("\n"+response.getText());
                 return response.getAnswer();
             }
             else throw new WrongCommandInputException();

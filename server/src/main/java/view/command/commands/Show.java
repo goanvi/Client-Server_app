@@ -13,7 +13,7 @@ public class Show extends AbstractCommand {
     CollectionManager collectionManager;
 
     public Show(CollectionManager collectionManager) {
-        super("Show", "Выводит в стандартный поток вывода все элементы коллекции в строковом представлении");
+        super("show", "выводит в стандартный поток вывода все элементы коллекции в строковом представлении");
         this.collectionManager = collectionManager;
     }
 
@@ -31,9 +31,10 @@ public class Show extends AbstractCommand {
         if (studyGroups.isEmpty()) {
             return new Response(true, "Коллекция пуста!");
         }else {
-            for (StudyGroup group:studyGroups){
-                stringBuilder.append(Formatter.format(group));
-            }
+            studyGroups.forEach((group)-> stringBuilder.append(Formatter.format(group)).append("\n"));
+//            for (StudyGroup group:studyGroups){
+//                stringBuilder.append(Formatter.format(group)).append("\n");
+//            }
         }
         return new Response(true, stringBuilder + "Коллекция успешно выведена!");
     }

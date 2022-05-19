@@ -12,7 +12,7 @@ public class Help extends AbstractCommand {
     private CommandManager commandManager;
 
     public Help(CommandManager commandManager) {
-        super("Help", "Выводит информацию по доступным командам");
+        super("help", "выводит информацию по доступным командам");
         this.commandManager = commandManager;
     }
 
@@ -20,7 +20,6 @@ public class Help extends AbstractCommand {
     public Response execute(Request request){
         StringBuilder stringBuilder = new StringBuilder();
             commandManager.getCommands().forEach((key,value) -> stringBuilder.append(key).append("  -  ").append(value.getDescription()).append("\n"));
-            ConsoleClient.println("Справка по командам успешно выведена!");
             return new Response(true,stringBuilder + "\n" +"Справка по командам успешно выведена");
     }
 

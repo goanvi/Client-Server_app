@@ -11,7 +11,7 @@ public class RemoveById extends AbstractCommand {
     CollectionManager collectionManager;
 
     public RemoveById(CollectionManager collectionManager) {
-        super("Remove_by_id", "Удаляет элемент из коллекции по его id");
+        super("remove_by_id", "удаляет элемент из коллекции по его id");
         this.collectionManager = collectionManager;
     }
 
@@ -27,7 +27,7 @@ public class RemoveById extends AbstractCommand {
             int id = Integer.parseInt(request.getArgument().trim());
             if (!collectionManager.getCollection().removeIf(studyGroup -> studyGroup.getID()==id))
                 throw new IncorrectInputException();
-            ConsoleClient.println("Элемент успешно удален!");
+//            ConsoleClient.println("Элемент успешно удален!");
             return new Response(true,"Элемент успешно удален!");
         }catch (IncorrectInputException exception){
             return new Response(false, "Такого id не существует!");

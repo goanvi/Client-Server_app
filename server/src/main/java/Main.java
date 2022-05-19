@@ -5,14 +5,14 @@ import request.Request;
 import response.Response;
 import server.Communicate;
 import server.Connect;
-import server.Start;
 import view.command.AbstractCommand;
 import view.command.commands.*;
+
+import java.io.Console;
 
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
 
@@ -32,9 +32,8 @@ public class Main {
         commandMap.put("filter_less_than_students_count", new FilterLessThanStudentsCount(collectionManager));
         commandMap.put("help", new Help(commandManager));
         commandMap.put("history", new History());
-        commandMap.put("exit", new Save(collectionManager,fileWorker));
-        commandMap.put("info",new Info(collectionManager));
-        commandMap.put("exit1", new Exit());
+        commandMap.put("exit", new ClientExit());
+        commandMap.put("info", new Info(collectionManager));
         commandMap.put("remove_any_by_semester_enum", new RemoveAnyBySemesterEnum(collectionManager));
         commandMap.put("remove_by_id", new RemoveById(collectionManager));
         commandMap.put("remove_greater", new RemoveGreater(collectionManager));
@@ -44,23 +43,26 @@ public class Main {
         commandMap.put("update_id", new UpdateId(collectionManager));
 //        Connect connect = new Connect();
         Connect.start();
+//        try {
+        System.out.println(" host: " + Connect.getPort());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         Connect.connect();
         Communicate communicate = new Communicate(Connect.getSocket());
-        Scanner scanner = new Scanner(System.in);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String input = scanner.nextLine().trim();
-                if (input.equalsIgnoreCase("save"))  commandMap.get("exit").execute(null);
-                if (input.equalsIgnoreCase("exit")) {
-                    commandMap.get("exit").execute(null);
-                    commandMap.get("exit1").execute(null);
-                }
+        Console console = System.console();
+        new Thread(() -> {
+            String input = console.readLine().trim();
+            if (input.equalsIgnoreCase("save")) new Save(collectionManager, fileWorker).execute(null);
+            if (input.equalsIgnoreCase("exit")) {
+                new ServerExit(collectionManager, fileWorker).execute(null);
+
             }
         }).start();
+
 //        Start start = new Start(communicate,commandManager);
 //        start.start();
-        while (true){
+        while (true) {
             try {
                 Request request = communicate.getRequest();
                 Response response = null;

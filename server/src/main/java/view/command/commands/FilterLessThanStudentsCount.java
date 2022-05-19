@@ -14,7 +14,7 @@ public class FilterLessThanStudentsCount extends AbstractCommand {
     private CollectionManager collectionManager;
 
     public FilterLessThanStudentsCount(CollectionManager manager) {
-        super("filter_less_than_students_count", "Выводит элементы, значение поля studentsCount" +
+        super("filter_less_than_students_count", "выводит элементы, значение поля studentsCount" +
                 " которых меньше заданного");
         this.collectionManager = manager;
     }
@@ -28,23 +28,13 @@ public class FilterLessThanStudentsCount extends AbstractCommand {
             List<StudyGroup> output = collectionManager.getLessThanStudentsCount(studCount);
             if (output.isEmpty()) return new Response(true, "Во всех группах количество человек больше");
             else {
-                for (StudyGroup group : output) {
-                out.append(Formatter.format(group));
-                }
+                output.forEach((group)-> out.append(Formatter.format(group)).append("\n"));
                 return new Response(true, out + "Элементы коллекции успешно выведены!");
             }
         }catch (EmptyCollectionException exception){
             return new Response(true, "Коллекция пуста!");//Не уверен, что так должно быть. Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
         }catch (NumberFormatException exception) {
             return new Response(false, "Значением поля должно являться число!");
-            //Дальше я не уверен, что эти исключения должны быть
-//        }catch (NoSuchElementException exception){
-//            ConsoleClient.printError("Значение поля не распознано!");
-//        } catch (IllegalStateException exception) {
-//            ConsoleClient.printError("Непредвиденная ошибка!");
-//            System.exit(0);
-//        }
-//        return false;
         }
     }
 

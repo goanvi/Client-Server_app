@@ -13,7 +13,7 @@ public class RemoveLower extends AbstractCommand {
     CollectionManager collectionManager;
 
     public RemoveLower(CollectionManager collectionManager) {
-        super("Remove_lower", "Удалить из коллекции все элементы, меньшие, чем заданный");
+        super("remove_lower", "удалить из коллекции все элементы, меньшие, чем заданный");
         this.collectionManager = collectionManager;
     }
 

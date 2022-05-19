@@ -14,7 +14,7 @@ public class RemoveAnyBySemesterEnum extends AbstractCommand {
     CollectionManager collectionManager;
 
     public RemoveAnyBySemesterEnum(CollectionManager manager) {
-        super("Remove_any_by_semester_enum {Три, Пять, Семь}", "Удаляет из коллекции один элемент," +
+        super("remove_any_by_semester_enum {Три, Пять, Семь}", "удаляет из коллекции один элемент," +
                 " значение поля semesterEnum которого эквивалентно заданному");
         this.collectionManager = manager;
     }

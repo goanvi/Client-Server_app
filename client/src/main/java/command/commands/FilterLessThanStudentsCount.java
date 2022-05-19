@@ -31,7 +31,7 @@ public class FilterLessThanStudentsCount extends AbstractCommand {
                 request = new Request(null, "filter_less_than_students_count", Integer.toString(input));
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println("\n"+response.getText()+"\n");
+                ConsoleClient.println("\n"+response.getText());
                 return response.getAnswer();
             } else throw new WrongCommandInputException();
         }

@@ -12,8 +12,9 @@ import java.io.IOException;
 public class Save extends AbstractCommand {
     CollectionManager collectionManager;
     FileWorker fileWorker;
+
     public Save(CollectionManager manager, FileWorker fileWorker) {
-        super("Save", "Сохраняет коллекцию в файл");
+        super("save", "сохраняет коллекцию в файл");
         this.collectionManager = manager;
         this.fileWorker = fileWorker;
     }

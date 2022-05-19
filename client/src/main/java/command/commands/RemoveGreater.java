@@ -40,7 +40,7 @@ public class RemoveGreater extends AbstractCommand {
                 request = new Request(group, "remove_greater", null);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println(response.getText());
+                ConsoleClient.println("\n"+response.getText());
 //                collectionManager.removeGreater(group);
 //                ConsoleClient.println("Все элементы больше заданного удалены!");
                 return response.getAnswer();

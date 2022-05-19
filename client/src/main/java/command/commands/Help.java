@@ -33,7 +33,7 @@ public class Help extends AbstractCommand {
                 communicate.send(request);
                 response = communicate.get();
                 if (response==null) return false;
-                ConsoleClient.println("\n"+response.getText()+"\n");
+                ConsoleClient.println("\n"+response.getText());
                 return response.getAnswer();
             }
             else throw new WrongCommandInputException();

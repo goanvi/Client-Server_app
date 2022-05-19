@@ -12,7 +12,7 @@ import view.command.AbstractCommand;
 public class RemoveGreater extends AbstractCommand {
     CollectionManager collectionManager;
     public RemoveGreater(CollectionManager collectionManager) {
-        super("Remove_greater", "Удалить из коллекции все элементы, превышающие заданный");
+        super("remove_greater", "удалить из коллекции все элементы, превышающие заданный");
         this.collectionManager = collectionManager;
     }
 

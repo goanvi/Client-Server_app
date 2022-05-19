@@ -9,7 +9,7 @@ public class Clear extends AbstractCommand {
     private CollectionManager collectionManager;
 
     public Clear(CollectionManager manager) {
-        super("clear", "Очищает коллекцию");
+        super("clear", "очищает коллекцию");
         this.collectionManager = manager;
     }
 
