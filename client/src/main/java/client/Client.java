@@ -31,17 +31,18 @@ public class Client {
     public static void setup(){
         try {
             oos = new ObjectOutputStream(socket.getOutputStream());
-//            System.out.println("open oos");
+            System.out.println("open oos");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            InputStream input = socket.getInputStream();
+//            InputStream input = socket.getInputStream();
 //            System.out.println("get input");
-            ois = new ObjectInputStream(input);
-//            System.out.println("open ois");
+            ois = new ObjectInputStream(socket.getInputStream());
+            System.out.println("open ois");
         } catch (IOException e) {
+            e.printStackTrace();
             ConsoleClient.printError("Ошибка создания потоков");
         }
     }
@@ -78,7 +79,7 @@ public class Client {
             return true;
         } catch (ConnectException exception){
             waitingConnection();
-            return true;
+            return false;
         } catch (IOException e) {
             ConsoleClient.printError("Ошибка подключения");
         }catch (NumberFormatException e){

@@ -51,12 +51,15 @@ public class Main {
         Connect.connect();
         Communicate communicate = new Communicate(Connect.getSocket());
         Console console = System.console();
-        new Thread(() -> {
-            String input = console.readLine().trim();
-            if (input.equalsIgnoreCase("save")) new Save(collectionManager, fileWorker).execute(null);
-            if (input.equalsIgnoreCase("exit")) {
-                new ServerExit(collectionManager, fileWorker).execute(null);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String input = console.readLine().trim();
+                if (input.equalsIgnoreCase("save")) new Save(collectionManager, fileWorker).execute(null);
+                if (input.equalsIgnoreCase("exit")) {
+                    new ServerExit(collectionManager, fileWorker).execute(null);
 
+                }
             }
         }).start();
 

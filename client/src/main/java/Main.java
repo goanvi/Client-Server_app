@@ -1,6 +1,6 @@
 import client.Client;
 import client.Communicate;
-import client.Connect;
+
 import command.AbstractCommand;
 import command.commands.*;
 import console.ConsoleClient;
