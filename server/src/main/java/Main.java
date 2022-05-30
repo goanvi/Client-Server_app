@@ -8,8 +8,6 @@ import server.Connect;
 import view.command.AbstractCommand;
 import view.command.commands.*;
 
-import java.io.Console;
-
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +21,8 @@ public class Main {
      * проверить IgnoreCase в AskPerson*/
 
     public static void main(String[] args) {
-        FileWorker fileWorker = new FileWorker(System.getenv("LABA5"));
-        CollectionManager collectionManager = new CollectionManager(System.getenv("LABA5"));
+        FileWorker fileWorker = new FileWorker(System.getenv("LABA6"));
+        CollectionManager collectionManager = new CollectionManager(System.getenv("LABA6"));
         Map<String, AbstractCommand> commandMap = new HashMap<>();
         CommandManager commandManager = new CommandManager(commandMap);
         commandMap.put("add", new Add(collectionManager));
@@ -42,26 +40,34 @@ public class Main {
         commandMap.put("sum_of_students_count", new SumOfStudentsCount(collectionManager));
         commandMap.put("update_id", new UpdateId(collectionManager));
 //        Connect connect = new Connect();
+        Connect.setPort(Integer.parseInt(args[0]));
+        Connect.open();
         Connect.start();
 //        try {
         System.out.println(" host: " + Connect.getPort());
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        Connect.connect();
-        Communicate communicate = new Communicate(Connect.getSocket());
-        Console console = System.console();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String input = console.readLine().trim();
-                if (input.equalsIgnoreCase("save")) new Save(collectionManager, fileWorker).execute(null);
-                if (input.equalsIgnoreCase("exit")) {
-                    new ServerExit(collectionManager, fileWorker).execute(null);
+                while (true){
+                    String input = System.console().readLine().trim();
+                    if (input.equalsIgnoreCase("save")) new Save(collectionManager, fileWorker).execute(null);
+                    if (input.equalsIgnoreCase("exit")) {
+                        new ServerExit(collectionManager, fileWorker).execute(null);
 
+                    }
                 }
             }
         }).start();
+        Connect.connect();
+//        try {
+//            Connect.getSocket().configureBlocking(false);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        Communicate communicate = new Communicate(Connect.getSocket());
 
 //        Start start = new Start(communicate,commandManager);
 //        start.start();

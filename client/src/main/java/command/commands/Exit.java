@@ -10,8 +10,6 @@ import request.Request;
 import response.Response;
 import utility.Asker;
 
-import java.net.SocketException;
-
 public class Exit extends AbstractCommand {
     Communicate communicate;
 
@@ -29,7 +27,10 @@ public class Exit extends AbstractCommand {
                 communicate.send(request);
                 //Должен ли я ждать ответа от сервера при отключении?
                 Response response = communicate.get();
-                if (response.getAnswer()) System.exit(0);
+                if (response.getAnswer()) {
+                    Client.close();
+                    System.exit(0);
+                }
 //                ConsoleClient.println("Выход из программы успешно выполнен!");
                 else {
                     ConsoleClient.println("\n"+response.getText()+"\n");

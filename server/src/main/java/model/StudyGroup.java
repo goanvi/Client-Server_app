@@ -16,7 +16,7 @@ public class StudyGroup implements Serializable{ //Потребуется пер
     private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private long studentsCount; //Значение поля должно быть больше 0
     private double averageMark; //Значение поля должно быть больше 0
-    private FormOfEducation formOfEducation; //Поле может быть null
+    private FormOfEducation formOfEducation; //Поле не может быть null
     private Semester semesterEnum; //Поле не может быть null
     private Person groupAdmin; //Поле может быть null
 

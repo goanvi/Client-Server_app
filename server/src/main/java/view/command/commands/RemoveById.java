@@ -4,7 +4,6 @@ import controller.CollectionManager;
 import request.Request;
 import response.Response;
 import view.command.AbstractCommand;
-import view.console.ConsoleClient;
 import view.exceptions.IncorrectInputException;
 
 public class RemoveById extends AbstractCommand {

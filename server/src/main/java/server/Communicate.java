@@ -3,10 +3,7 @@ package server;
 import request.Request;
 import response.Response;
 
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.SocketException;
 import java.nio.channels.SocketChannel;
 
@@ -47,8 +44,11 @@ public class Communicate {
             request = (Request) ois.readObject();
         }catch (SocketException e){
 
+        }catch (EOFException ex){
+
         }catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ioe");
+//            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

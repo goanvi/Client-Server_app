@@ -3,17 +3,14 @@ package controller;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import model.StudyGroup;
-import view.console.ConsoleClient;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class ParserCSV { // Подумать, как сделать обобщенный парсер
     public static String toCSV(Collection<StudyGroup> collection) {
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         Object[] collArray = collection.toArray();
 //        String[] header = makeStudyGroupHeader();
 //        stringBuilder.append(Arrays.toString(header).replace("[","").replace("]",""));
@@ -28,13 +25,15 @@ public class ParserCSV { // Подумать, как сделать обобще
     public static TreeSet<StudyGroup> readFile (String file){
         Comparator<StudyGroup> sgc = new StudyGroupComparator(); //Будут использовать в main, добовление коллекции через addAll
         TreeSet<StudyGroup> collection = new TreeSet<>(sgc);
-        try(CSVReader reader = new CSVReader(new FileReader(file, StandardCharsets.UTF_8))){
+        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+                new FileInputStream(file), StandardCharsets.UTF_8));
+                CSVReader reader = new CSVReader(bufferedReader)){
             List<String[]> input = reader.readAll();
             input.forEach((object)-> {
                 collection.add(new StudyGroup(object));
             });
         }catch (FileNotFoundException exception){
-            ConsoleClient.printError("Файл не найден!");
+            exception.printStackTrace();
         } catch (IOException exception) {
             exception.printStackTrace();
         } catch (CsvException e) {

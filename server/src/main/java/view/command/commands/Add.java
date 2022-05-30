@@ -9,7 +9,7 @@ import response.Response;
 import view.command.AbstractCommand;
 
 public class Add extends AbstractCommand {
-    private CollectionManager collectionManager;
+    private final CollectionManager collectionManager;
 
     public Add (CollectionManager collectionManager){
         super("add", "добавляет новый элемент в коллекцию");

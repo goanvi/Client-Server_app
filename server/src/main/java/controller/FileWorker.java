@@ -1,9 +1,6 @@
 package controller;
 
-import view.console.ConsoleClient;
-
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 public class FileWorker {
     String file;
@@ -13,10 +10,10 @@ public class FileWorker {
     }
 
     public void writer(String data) throws IOException,SecurityException {
-        try (PrintWriter writer = new PrintWriter(file, StandardCharsets.UTF_8)) {
+        try (OutputStream os = new FileOutputStream(file);
+             PrintWriter writer = new PrintWriter(new OutputStreamWriter(os, "UTF-8"))) {
             writer.write(data);
         } catch (FileNotFoundException e) {
-            ConsoleClient.printError("Файл не найден! Попытка создания нового файла");
             createFile(file);
             writer(data);
         }
@@ -69,7 +66,7 @@ public class FileWorker {
                 input.append((char)letter);
             }
         } catch (FileNotFoundException ex) {
-            ConsoleClient.printError("Файл не найден! надо доделать");
+            ex.printStackTrace();
         } catch (IOException exception) {
             exception.printStackTrace();
         }

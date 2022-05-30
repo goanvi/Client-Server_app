@@ -11,7 +11,7 @@ import view.utility.Formatter;
 import java.util.List;
 
 public class FilterLessThanStudentsCount extends AbstractCommand {
-    private CollectionManager collectionManager;
+    private final CollectionManager collectionManager;
 
     public FilterLessThanStudentsCount(CollectionManager manager) {
         super("filter_less_than_students_count", "выводит элементы, значение поля studentsCount" +

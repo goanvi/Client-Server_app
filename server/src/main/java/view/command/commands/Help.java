@@ -5,11 +5,10 @@ import controller.CommandManager;
 import request.Request;
 import response.Response;
 import view.command.AbstractCommand;
-import view.console.ConsoleClient;
 
 
 public class Help extends AbstractCommand {
-    private CommandManager commandManager;
+    private final CommandManager commandManager;
 
     public Help(CommandManager commandManager) {
         super("help", "выводит информацию по доступным командам");

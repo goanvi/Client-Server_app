@@ -4,8 +4,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class IdManager {
-    private static Set<Integer> idStudyGroupBuffer = new LinkedHashSet<>();
-    private static Set<String> idPersonBuffer = new LinkedHashSet<>();
+    private static final Set<Integer> idStudyGroupBuffer = new LinkedHashSet<>();
+    private static final Set<String> idPersonBuffer = new LinkedHashSet<>();
 
     public static int setStudyGroupID (Integer id){
         int id0 = id;

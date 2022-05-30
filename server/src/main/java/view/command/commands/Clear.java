@@ -6,7 +6,7 @@ import response.Response;
 import view.command.AbstractCommand;
 
 public class Clear extends AbstractCommand {
-    private CollectionManager collectionManager;
+    private final CollectionManager collectionManager;
 
     public Clear(CollectionManager manager) {
         super("clear", "очищает коллекцию");

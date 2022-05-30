@@ -5,6 +5,7 @@ import controller.FileWorker;
 import controller.ParserCSV;
 import request.Request;
 import response.Response;
+import server.Connect;
 import view.command.AbstractCommand;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class ServerExit extends AbstractCommand {
     public Response execute(Request request) {
         try {
             fileWorker.writer(ParserCSV.toCSV(collectionManager.getCollection()));
+            if (Connect.getSocket()!=null) Connect.close();
             System.exit(0);
             return null;
 

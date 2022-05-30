@@ -7,13 +7,13 @@ import utility.Asker;
 import utility.CommandManager;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.*;
+import java.net.ConnectException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Client {
     static String addr;
@@ -133,7 +133,7 @@ public class Client {
                 ConsoleClient.printError("Ошибка подключения");
                 flag=true;
             }
-            ConsoleClient.println("\rОжидание повторного подключения: " + sec + "/60 секунд");
+            ConsoleClient.print("\rОжидание повторного подключения: " + sec + "/60 секунд");
             sec++;
             if (sec > 60) {
                 ConsoleClient.println("Клиент не дождался подключения. Завершение работы программы");

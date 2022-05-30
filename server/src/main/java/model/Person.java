@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Person implements Serializable { // Помнить что этот класс может бить null, переделать конструкторы при необходимости
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private java.time.LocalDateTime birthday; //Поле может быть null
-    private float weight; //Значение поля должно быть больше 0
-    private String passportID; //Длина строки не должна быть больше 33, Значение этого поля должно быть уникальным, Поле может быть null
+    private final String name; //Поле не может быть null, Строка не может быть пустой
+    private final java.time.LocalDateTime birthday; //Поле может быть null
+    private final float weight; //Значение поля должно быть больше 0
+    private final String passportID; //Длина строки не должна быть больше 33, Значение этого поля должно быть уникальным, Поле может быть null
 
 
     public Person(String name, LocalDateTime birthday, float weight, String passportID) {
