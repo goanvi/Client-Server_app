@@ -1,4 +1,4 @@
 package command.exceptions;
 
-public class ScriptLoopingException extends Exception{
+public class ScriptLoopingException extends Exception {
 }

@@ -1,6 +1,6 @@
 package controller.exceptions;
 
-public class EmptyCollectionException extends Exception{
+public class EmptyCollectionException extends Exception {
 
     @Override
     public String getMessage() {

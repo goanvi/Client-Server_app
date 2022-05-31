@@ -9,18 +9,10 @@ public enum SemesterDTO implements Serializable {
 
     private final String name;
 
-    SemesterDTO(String name){
-        this.name =name;
+    SemesterDTO(String name) {
+        this.name = name;
     }
 
-//    public static SemesterDTO equals(String name) throws IncorrectNameEnumException {
-//        switch (name.toLowerCase()) {
-//            case "три" : return SemesterDTO.THIRD;
-//            case "пять" : return SemesterDTO.FIFTH;
-//            case "семь" : return SemesterDTO.SEVENTH;
-//            default : throw new IncorrectNameEnumException();
-//        }
-//    }
 
     public String getName() {
         return name;

@@ -17,12 +17,12 @@ public class Info extends AbstractCommand {
     }
 
     @Override
-    public Response execute(Request request){
+    public Response execute(Request request) {
         String stringBuilder =
                 "Коллекция типа: " + collectionManager.getCollectionType() + "\n" +
-                "Размер коллекции: " + collectionManager.getCollectionSize() + "\n" +
-                "Время последней инициализации: " + collectionManager.getLastLoadTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n" +
-                "Информация о коллекции успешно выведена!";
+                        "Размер коллекции: " + collectionManager.getCollectionSize() + "\n" +
+                        "Время последней инициализации: " + collectionManager.getLastLoadTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "\n" +
+                        "Информация о коллекции успешно выведена!";
         return new Response(true, stringBuilder);
     }
 

@@ -5,6 +5,8 @@ import response.Response;
 
 public interface Command {
     String getDescription();
+
     String getName();
-    Response execute (Request request);
+
+    Response execute(Request request);
 }

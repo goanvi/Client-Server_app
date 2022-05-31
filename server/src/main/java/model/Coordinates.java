@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class Coordinates implements Serializable{
+public class Coordinates implements Serializable {
     private final Integer x; //Максимальное значение поля: 811, Поле не может быть null
     private final int y;
 
@@ -21,7 +21,7 @@ public class Coordinates implements Serializable{
 
     @Override
     public String toString() {
-        return  "x=" + x +
+        return "x=" + x +
                 "y=" + y;
     }
 }

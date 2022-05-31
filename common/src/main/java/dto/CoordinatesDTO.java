@@ -2,7 +2,7 @@ package dto;
 
 import java.io.Serializable;
 
-public class CoordinatesDTO implements Serializable{
+public class CoordinatesDTO implements Serializable {
     private Integer x; //Максимальное значение поля: 811, Поле не может быть null
     private int y;
 
@@ -29,7 +29,7 @@ public class CoordinatesDTO implements Serializable{
 
     @Override
     public String toString() {
-        return  "x=" + x +
+        return "x=" + x +
                 "y=" + y;
     }
 }

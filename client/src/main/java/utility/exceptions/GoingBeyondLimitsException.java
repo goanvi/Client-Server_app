@@ -1,6 +1,6 @@
 package utility.exceptions;
 
-public class GoingBeyondLimitsException extends Exception{
+public class GoingBeyondLimitsException extends Exception {
 
     @Override
     public String getMessage() {

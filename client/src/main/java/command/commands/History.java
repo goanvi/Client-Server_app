@@ -1,6 +1,5 @@
 package command.commands;
 
-import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -9,8 +8,6 @@ import exceptions.IncorrectScriptException;
 import request.Request;
 import response.Response;
 import utility.Asker;
-
-import java.net.SocketException;
 
 public class History extends AbstractCommand {
     Communicate communicate;
@@ -23,25 +20,15 @@ public class History extends AbstractCommand {
     @Override
     public boolean execute(String argument) throws IncorrectScriptException {
         Request request = null;
-        try{
+        try {
             if (argument.isEmpty()) {
                 request = new Request(null, "history", null);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println("\n"+response.getText());
+                ConsoleClient.println("\n" + response.getText());
                 return response.getAnswer();
-            }
-            else throw new WrongCommandInputException();
-        }
-//        catch (SocketException exception){
-//            Client.waitingConnection();
-//            try {
-//                communicate.send(request);
-//            } catch (SocketException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        catch (WrongCommandInputException exception){
+            } else throw new WrongCommandInputException();
+        } catch (WrongCommandInputException exception) {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
@@ -49,7 +36,7 @@ public class History extends AbstractCommand {
         return false;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "history - Выводит последние 11 команд (без их аргументов)";
     }
 }

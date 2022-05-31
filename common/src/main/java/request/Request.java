@@ -8,7 +8,8 @@ public class Request implements Serializable {
     StudyGroupDTO groupDto;
     String name;
     String argument;
-    public Request (StudyGroupDTO dto, String name, String argument){
+
+    public Request(StudyGroupDTO dto, String name, String argument) {
         this.name = name;
         this.argument = argument;
         this.groupDto = dto;

@@ -10,11 +10,11 @@ public class ClientExit extends AbstractCommand {
     }
 
     @Override
-    public Response execute(Request request){
-        return new Response(true,"");
+    public Response execute(Request request) {
+        return new Response(true, "");
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "exit - Завершает программу (без сохранения в файл)";
     }
 }

@@ -15,33 +15,17 @@ public class RemoveById extends AbstractCommand {
     }
 
     @Override
-    public Response execute(Request request){
-        try{
-//                ConsoleClient.println("Ведите id элемента!");
-////                if (Asker.getFileMode()){
-////                    Scanner scriptScanner = ConsoleClient.getScriptScanner();
-////                    input = scriptScanner.nextLine().trim();
-////                }else input = scanner.nextLine().trim();
-//                input = consoleClient.readLine();
+    public Response execute(Request request) {
+        try {
             int id = Integer.parseInt(request.getArgument().trim());
-            if (!collectionManager.getCollection().removeIf(studyGroup -> studyGroup.getID()==id))
+            if (!collectionManager.getCollection().removeIf(studyGroup -> studyGroup.getID() == id))
                 throw new IncorrectInputException();
-//            ConsoleClient.println("Элемент успешно удален!");
-            return new Response(true,"Элемент успешно удален!");
-        }catch (IncorrectInputException exception){
+            return new Response(true, "Элемент успешно удален!");
+        } catch (IncorrectInputException exception) {
             return new Response(false, "Такого id не существует!");
-        }catch (NumberFormatException exception){
+        } catch (NumberFormatException exception) {
             return new Response(false, "Значением поля должно являться число!");
         }
-        //Дальше хз
-//        catch (NoSuchElementException exception){
-//            ConsoleClient.printError("Значение поля не распознано!");
-//            if (Asker.getFileMode()) throw new IncorrectScriptException();
-//        } catch (IllegalStateException exception) {
-//            ConsoleClient.printError("Непредвиденная ошибка!");
-//            System.exit(0);
-//        }
-//        return false;
     }
 
     public String getMessage() {

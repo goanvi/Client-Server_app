@@ -1,6 +1,5 @@
 package command.commands;
 
-import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -9,8 +8,6 @@ import exceptions.IncorrectScriptException;
 import request.Request;
 import response.Response;
 import utility.Asker;
-
-import java.net.SocketException;
 
 public class Info extends AbstractCommand {
     Communicate communicate;
@@ -29,19 +26,10 @@ public class Info extends AbstractCommand {
                 request = new Request(null, "info", null);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println("\n"+response.getText());
+                ConsoleClient.println("\n" + response.getText());
                 return response.getAnswer();
             } else throw new WrongCommandInputException();
-        }
-//        catch (SocketException exception){
-//            Client.waitingConnection();
-//            try {
-//                communicate.send(request);
-//            } catch (SocketException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        catch (WrongCommandInputException exception) {
+        } catch (WrongCommandInputException exception) {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();

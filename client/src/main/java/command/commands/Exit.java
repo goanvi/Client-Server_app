@@ -22,34 +22,21 @@ public class Exit extends AbstractCommand {
     public boolean execute(String argument) throws IncorrectScriptException {
         Request request = null;
         try {
-            if (argument.isEmpty()){
-                request = new Request(null,"exit", null);
+            if (argument.isEmpty()) {
+                request = new Request(null, "exit", null);
                 communicate.send(request);
-                //Должен ли я ждать ответа от сервера при отключении?
                 Response response = communicate.get();
                 if (response.getAnswer()) {
                     Client.close();
                     System.exit(0);
-                }
-//                ConsoleClient.println("Выход из программы успешно выполнен!");
-                else {
-                    ConsoleClient.println("\n"+response.getText()+"\n");
+                } else {
+                    ConsoleClient.println("\n" + response.getText() + "\n");
                     return false;
                 }
                 return true;
-            }
-            else throw new WrongCommandInputException();
+            } else throw new WrongCommandInputException();
 
-        }
-//        catch (SocketException exception){
-//            Client.waitingConnection();
-//            try {
-//                communicate.send(request);
-//            } catch (SocketException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        catch (WrongCommandInputException exception){
+        } catch (WrongCommandInputException exception) {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
@@ -57,7 +44,7 @@ public class Exit extends AbstractCommand {
         return false;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "exit - Завершает программу (без сохранения в файл)";
     }
 }

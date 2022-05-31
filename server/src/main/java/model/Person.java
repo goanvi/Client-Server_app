@@ -19,6 +19,7 @@ public class Person implements Serializable { // Помнить что этот 
         this.weight = weight;
         this.passportID = passportID;
     }
+
     public Person(String name, LocalDateTime birthday, float weight) {
         this.name = name;
         this.birthday = birthday;
@@ -45,7 +46,7 @@ public class Person implements Serializable { // Помнить что этот 
 
     @Override
     public String toString() {
-        return  "name=" + name+
+        return "name=" + name +
                 ", birthday=" + birthday +
                 ", weight=" + weight +
                 ", passportID=" + passportID;

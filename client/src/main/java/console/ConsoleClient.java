@@ -22,48 +22,40 @@ public class ConsoleClient {
         this.console = console;
     }
 
-    public void interactiveMode(){
+    public void interactiveMode() {
         try {
-            while (true){
+            while (true) {
                 Asker.setUserMode();
                 println("");
                 println("Введите команду");
-                String[] input = (readLine()+" ").split(" ", 2);
-                commandManager.callCommand(input[0],input[1]);
+                String[] input = (readLine() + " ").split(" ", 2);
+                commandManager.callCommand(input[0], input[1]);
             }
-        }catch (IncorrectScriptException exception){
+        } catch (IncorrectScriptException exception) {
             printError("Эта ошибка не должна была тут выпасть!");
             System.exit(0);
         }
     }
 
-    public void fileMode(Scanner scanner){
+    public void fileMode(Scanner scanner) {
         String inputLine;
         try {
             scanners.add(scanner);
             Asker.setFileMode();
             println("Выполнение скрипта из файла " + files.getLast());
             while (true) {
-                scriptScanner= scanners.getLast();
-                if (scanners.getLast().hasNextLine()){
+                scriptScanner = scanners.getLast();
+                if (scanners.getLast().hasNextLine()) {
                     inputLine = scanners.getLast().nextLine().trim();
                     String[] input = (inputLine + " ").split(" ", 2);
                     commandManager.callCommand(input[0], input[1]);
-                }
-                else{
+                } else {
                     break;
                 }
-//                if (inputLine.equals("")){
-//                    inputLine= scanners.getLast().nextLine().trim();
-//                    if (inputLine.equals("")) {
-//                        println("Скрипт выполнен");
-//                        break;
-//                    }
-//                }
 
             }
             scanners.removeLast();
-        }catch (IncorrectScriptException exception){
+        } catch (IncorrectScriptException exception) {
             printError(exception.getMessage());
             files.clear();
             scanners.clear();
@@ -72,27 +64,27 @@ public class ConsoleClient {
 
     }
 
-    public Console getConsole(){
+    public Console getConsole() {
         return console;
     }
 
-    public String readLine(){
-        try{
-        if (Asker.getFileMode()){
-            return scriptScanner.nextLine().trim();
-        }
-        return getConsole().readLine().trim();
-        }catch (NullPointerException exception){
+    public String readLine() {
+        try {
+            if (Asker.getFileMode()) {
+                return scriptScanner.nextLine().trim();
+            }
+            return getConsole().readLine().trim();
+        } catch (NullPointerException exception) {
             readLine();
         }
         return null;
     }
 
-    public Scanner getScriptScanner(){
+    public Scanner getScriptScanner() {
         return scriptScanner;
     }
 
-    public Deque<String> getFiles(){
+    public Deque<String> getFiles() {
         return files;
     }
 

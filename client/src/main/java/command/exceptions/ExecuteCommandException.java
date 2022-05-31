@@ -1,4 +1,4 @@
 package command.exceptions;
 
-public class ExecuteCommandException extends Exception{
+public class ExecuteCommandException extends Exception {
 }

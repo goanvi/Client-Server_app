@@ -13,36 +13,29 @@ public class Communicate {
     ObjectOutputStream oos;
     Request request;
 
-    public Communicate (ObjectInputStream ois, ObjectOutputStream oos) {
+    public Communicate(ObjectInputStream ois, ObjectOutputStream oos) {
         this.oos = oos;
         this.ois = ois;
     }
 
-    public void send(Request req){
+    public void send(Request req) {
         request = req;
         try {
             oos.writeObject(request);
             oos.flush();
-        } catch (SocketException e){
-//            System.out.println("в сендлере");
-//            System.out.println(e.getMessage());
+        } catch (SocketException e) {
             Client.waitingConnection();
             send(request);
         } catch (IOException e) {
             e.printStackTrace();
-//            System.out.println("в сендлере");
-//            System.out.println(e.getMessage());
-//            Client.waitingConnection();
         }
     }
 
-    public Response get(){
+    public Response get() {
         Response response = null;
         try {
             response = (Response) ois.readObject();
-        } catch (SocketException exception){
-//            System.out.println("exception in get");
-//            exception.printStackTrace();
+        } catch (SocketException exception) {
             Client.waitingConnection();
             send(request);
             return get();

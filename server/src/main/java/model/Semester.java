@@ -11,16 +11,20 @@ public enum Semester implements Serializable {
 
     private final String name;
 
-    Semester(String name){
-        this.name =name;
+    Semester(String name) {
+        this.name = name;
     }
 
     public static Semester equals(String name) throws IncorrectNameEnumException {
         switch (name.toLowerCase()) {
-            case "три" : return Semester.THIRD;
-            case "пять" : return Semester.FIFTH;
-            case "семь" : return Semester.SEVENTH;
-            default : throw new IncorrectNameEnumException();
+            case "три":
+                return Semester.THIRD;
+            case "пять":
+                return Semester.FIFTH;
+            case "семь":
+                return Semester.SEVENTH;
+            default:
+                throw new IncorrectNameEnumException();
         }
     }
 

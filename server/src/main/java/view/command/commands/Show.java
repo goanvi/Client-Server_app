@@ -17,29 +17,19 @@ public class Show extends AbstractCommand {
         this.collectionManager = collectionManager;
     }
 
-//    private String formatOutput(TreeSet<StudyGroupDTO> groups){
-//        ArrayList<String> strings = new ArrayList<>();
-//        groups.forEach(group -> {
-//            strings.add(group.toString().replace(",","\n")+"\n\n");
-//        });
-//        return strings.toString().replaceAll("[\\[\\],]","");
-//    }
     @Override
-    public Response execute(Request request){
+    public Response execute(Request request) {
         StringBuilder stringBuilder = new StringBuilder();
         TreeSet<StudyGroup> studyGroups = collectionManager.getCollection();
         if (studyGroups.isEmpty()) {
             return new Response(true, "Коллекция пуста!");
-        }else {
-            studyGroups.forEach((group)-> stringBuilder.append(Formatter.format(group)).append("\n"));
-//            for (StudyGroup group:studyGroups){
-//                stringBuilder.append(Formatter.format(group)).append("\n");
-//            }
+        } else {
+            studyGroups.forEach((group) -> stringBuilder.append(Formatter.format(group)).append("\n"));
         }
         return new Response(true, stringBuilder + "Коллекция успешно выведена!");
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "show - Выводит в стандартный поток вывода все элементы коллекции в строковом представлении";
     }
 }

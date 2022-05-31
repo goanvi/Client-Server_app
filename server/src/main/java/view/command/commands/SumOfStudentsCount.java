@@ -15,19 +15,19 @@ public class SumOfStudentsCount extends AbstractCommand {
     }
 
     @Override
-    public Response execute(Request request){
+    public Response execute(Request request) {
         String out;
-        try{
-            out = "Общее количество студентов: "+collectionManager.getSumOfStudentsCount() + "\n"+
+        try {
+            out = "Общее количество студентов: " + collectionManager.getSumOfStudentsCount() + "\n" +
                     "Количество студентов успешно выведено!";
             return new Response(true, out);
-        }catch (EmptyCollectionException exception){
+        } catch (EmptyCollectionException exception) {
             return new Response(true, "Коллекция пуста!");//Не уверен, что так должно быть.
             // Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
         }
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "sum_of_students_count - Выводит сумму значений поля studentsCount для всех элементов коллекции";
     }
 }

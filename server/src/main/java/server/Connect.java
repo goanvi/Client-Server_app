@@ -11,9 +11,11 @@ public class Connect {
     static ServerSocketChannel server;
     static int port = 5000;
     static InetSocketAddress inetSocketAddress;
-    public Connect (){}
 
-    public static void open(){
+    public Connect() {
+    }
+
+    public static void open() {
         try {
             server = ServerSocketChannel.open();
         } catch (IOException e) {
@@ -21,11 +23,11 @@ public class Connect {
         }
     }
 
-    public static void start (){
+    public static void start() {
         try {
             inetSocketAddress = new InetSocketAddress(port);
             server.bind(inetSocketAddress);
-        }catch (BindException exception){
+        } catch (BindException exception) {
             System.out.println("Порт занят");
             while (true) {
                 try {
@@ -37,13 +39,12 @@ public class Connect {
                 }
             }
             start();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void connect(){
+    public static void connect() {
         try {
             socket = server.accept();
         } catch (IOException e) {
@@ -51,7 +52,7 @@ public class Connect {
         }
     }
 
-    public static void close(){
+    public static void close() {
         try {
             socket.close();
         } catch (IOException e) {
@@ -67,15 +68,15 @@ public class Connect {
         return port;
     }
 
+    public static void setPort(int port) {
+        Connect.port = port;
+    }
+
     public static ServerSocketChannel getServer() {
         return server;
     }
 
     public static InetSocketAddress getInetSocketAddress() {
         return inetSocketAddress;
-    }
-
-    public static void setPort(int port) {
-        Connect.port = port;
     }
 }

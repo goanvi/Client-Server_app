@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.UUID;
 
-public class StudyGroup implements Serializable{ //Потребуется переделать конструкторы для корректной работы по ТЗ
+public class StudyGroup implements Serializable { //Потребуется переделать конструкторы для корректной работы по ТЗ
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -50,7 +50,7 @@ public class StudyGroup implements Serializable{ //Потребуется пер
         IdManager.saveStudyGroupID(this.id);
     }
 
-    public StudyGroup(int id,String name, Coordinates coordinates, long studentsCount,
+    public StudyGroup(int id, String name, Coordinates coordinates, long studentsCount,
                       double averageMark, FormOfEducation formOfEducation, Semester semesterEnum, Person person) {
         this.id = id;
         this.name = name;
@@ -85,11 +85,11 @@ public class StudyGroup implements Serializable{ //Потребуется пер
         } else groupAdmin = null;
     }
 
-    public double compareTo (StudyGroup studyGroup){
-        return averageMark-studyGroup.getAverageMark();
+    public double compareTo(StudyGroup studyGroup) {
+        return averageMark - studyGroup.getAverageMark();
     }
 
-    public Integer getID(){
+    public Integer getID() {
         return id;
     }
 
@@ -97,74 +97,74 @@ public class StudyGroup implements Serializable{ //Потребуется пер
         return name;
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public FormOfEducation getFormOfEducation() {
-        return formOfEducation;
-    }
-
-    public Person getGroupAdmin() {
-        return groupAdmin;
-    }
-
-    public Semester getSemesterEnum(){
-        return semesterEnum;
-    }
-
-    public long getStudentsCount() {
-        return studentsCount;
-    }
-
-    public double getAverageMark() {
-        return averageMark;
-    }
-
-    public void setId(Integer id){
-        this.id = id;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
 
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public void setStudentsCount(long studentsCount) {
-        this.studentsCount = studentsCount;
-    }
-
-    public void setAverageMark(double averageMark) {
-        this.averageMark = averageMark;
+    public FormOfEducation getFormOfEducation() {
+        return formOfEducation;
     }
 
     public void setFormOfEducation(FormOfEducation formOfEducation) {
         this.formOfEducation = formOfEducation;
     }
 
-    public void setSemesterEnum(Semester semesterEnum) {
-        this.semesterEnum = semesterEnum;
+    public Person getGroupAdmin() {
+        return groupAdmin;
     }
 
     public void setGroupAdmin(Person groupAdmin) {
         this.groupAdmin = groupAdmin;
     }
 
+    public Semester getSemesterEnum() {
+        return semesterEnum;
+    }
+
+    public void setSemesterEnum(Semester semesterEnum) {
+        this.semesterEnum = semesterEnum;
+    }
+
+    public long getStudentsCount() {
+        return studentsCount;
+    }
+
+    public void setStudentsCount(long studentsCount) {
+        this.studentsCount = studentsCount;
+    }
+
+    public double getAverageMark() {
+        return averageMark;
+    }
+
+    public void setAverageMark(double averageMark) {
+        this.averageMark = averageMark;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         if (groupAdmin == null) {
-            return  "id=" + id +
+            return "id=" + id +
                     ", name=" + name +
                     ", coordinatesX=" + coordinates.getX() +
                     ", coordinatesY=" + coordinates.getY() +
@@ -175,7 +175,7 @@ public class StudyGroup implements Serializable{ //Потребуется пер
                     ", semesterEnum=" + semesterEnum +
                     ", groupAdmin=null";
         } else {
-            return  "id=" + id +
+            return "id=" + id +
                     ", name=" + name +
                     ", coordinatesX=" + coordinates.getX() +
                     ", coordinatesY=" + coordinates.getY() +

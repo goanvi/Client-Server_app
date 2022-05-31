@@ -18,54 +18,39 @@ public class RemoveLower extends AbstractCommand {
     }
 
     @Override
-    public Response execute(Request request){
+    public Response execute(Request request) {
         StudyGroup group;
-        try{
+        try {
             StudyGroupDTO groupDTO = request.getGroupDto();
-            if(groupDTO.getGroupAdmin().getWeight()==0){
+            if (groupDTO.getGroupAdmin().getWeight() == 0) {
                 group = new StudyGroup(
                         groupDTO.getName(),
-                        new Coordinates(groupDTO.getCoordinates().getX(),groupDTO.getCoordinates().getY()),
+                        new Coordinates(groupDTO.getCoordinates().getX(), groupDTO.getCoordinates().getY()),
                         groupDTO.getStudentsCount(),
                         groupDTO.getAverageMark(),
                         FormOfEducation.convert(groupDTO.getFormOfEducation().getName()),
                         Semester.equals(groupDTO.getSemesterEnum().getName()),
                         null);
-            }else {
+            } else {
                 group = new StudyGroup(
                         groupDTO.getName(),
-                        new Coordinates(groupDTO.getCoordinates().getX(),groupDTO.getCoordinates().getY()),
+                        new Coordinates(groupDTO.getCoordinates().getX(), groupDTO.getCoordinates().getY()),
                         groupDTO.getStudentsCount(),
                         groupDTO.getAverageMark(),
                         FormOfEducation.convert(groupDTO.getFormOfEducation().getName()),
                         Semester.equals(groupDTO.getSemesterEnum().getName()),
                         new Person(groupDTO.getGroupAdmin().getName(),
                                 groupDTO.getGroupAdmin().getBirthday(),
-                                groupDTO.getGroupAdmin().getWeight()));}
-//                ConsoleClient.println("Введите id элемента!");
-////                if (Asker.getFileMode()){
-////                    Scanner scriptScanner = ConsoleClient.getScriptScanner();
-////                    input = scriptScanner.nextLine().trim();
-////                }else input = scanner.nextLine().trim();
-//                int inputInt = Integer.parseInt(consoleClient.readLine());
-//                if (!IdManager.containsStudyGroupID(inputInt)) throw new IncorrectInputException();
-//                StudyGroupDTO group = collectionManager.getByID(inputInt);
+                                groupDTO.getGroupAdmin().getWeight()));
+            }
             collectionManager.removeLower(group);
             return new Response(true, "Все элементы меньше заданного удалены!");
         } catch (EmptyCollectionException exception) {
             return new Response(true, "Коллекция пуста!");//Не уверен, что так должно быть.
-                // Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
+            // Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
         } catch (IncorrectNameEnumException e) {
-                return new Response(false,"Данные введены некорректно!");
+            return new Response(false, "Данные введены некорректно!");
         }
-//            catch (NoSuchElementException exception) {
-//            ConsoleClient.printError("Значение поля не распознано!");
-//            if (Asker.getFileMode()) throw new IncorrectScriptException();
-//        } catch (IllegalStateException exception) {
-//            ConsoleClient.printError("Непредвиденная ошибка!");
-//            System.exit(0);
-//    }
-//            return false;
     }
 
     public String getMessage() {

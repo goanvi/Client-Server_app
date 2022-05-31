@@ -20,7 +20,7 @@ public class FilterLessThanStudentsCount extends AbstractCommand {
     }
 
     @Override
-    public Response execute(Request request){
+    public Response execute(Request request) {
         long studCount;
         StringBuilder out = new StringBuilder();
         try {
@@ -28,12 +28,12 @@ public class FilterLessThanStudentsCount extends AbstractCommand {
             List<StudyGroup> output = collectionManager.getLessThanStudentsCount(studCount);
             if (output.isEmpty()) return new Response(true, "Во всех группах количество человек больше");
             else {
-                output.forEach((group)-> out.append(Formatter.format(group)).append("\n"));
+                output.forEach((group) -> out.append(Formatter.format(group)).append("\n"));
                 return new Response(true, out + "Элементы коллекции успешно выведены!");
             }
-        }catch (EmptyCollectionException exception){
+        } catch (EmptyCollectionException exception) {
             return new Response(true, "Коллекция пуста!");//Не уверен, что так должно быть. Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
-        }catch (NumberFormatException exception) {
+        } catch (NumberFormatException exception) {
             return new Response(false, "Значением поля должно являться число!");
         }
     }

@@ -69,11 +69,11 @@ public class UpdateId extends AbstractCommand {
         } catch (IncorrectInputException exception) {
             return new Response(false, "Введенные данные некорректны!");
         } catch (IncorrectNameEnumException e) {
-            return new Response(false,"Данные введены некорректно!");
+            return new Response(false, "Данные введены некорректно!");
         }
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "update id {element} - Обновляет значение элемента коллекции, id которого равен заданному";
     }
 }

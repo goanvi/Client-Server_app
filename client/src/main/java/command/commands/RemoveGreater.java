@@ -1,6 +1,5 @@
 package command.commands;
 
-import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -11,7 +10,6 @@ import request.Request;
 import response.Response;
 import utility.Asker;
 
-import java.net.SocketException;
 import java.util.NoSuchElementException;
 
 public class RemoveGreater extends AbstractCommand {
@@ -27,8 +25,8 @@ public class RemoveGreater extends AbstractCommand {
     @Override
     public boolean execute(String argument) throws IncorrectScriptException {
         Request request = null;
-        try{
-            if (argument.isEmpty()){
+        try {
+            if (argument.isEmpty()) {
                 StudyGroupDTO group = new StudyGroupDTO(
                         asker.askName(),
                         asker.askCoordinates(),
@@ -40,31 +38,17 @@ public class RemoveGreater extends AbstractCommand {
                 request = new Request(group, "remove_greater", null);
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println("\n"+response.getText());
-//                collectionManager.removeGreater(group);
-//                ConsoleClient.println("Все элементы больше заданного удалены!");
+                ConsoleClient.println("\n" + response.getText());
                 return response.getAnswer();
-            }else throw new WrongCommandInputException();
-//        }catch (EmptyCollectionException exception){
-//            ConsoleClient.printError("Коллекция пуста!");
-//            return true;//Не уверен, что так должно быть. Пока что считаю, что пустая коллекция не повод выбрасывать ошибку выполнения
-        }
-//        catch (SocketException exception){
-//            Client.waitingConnection();
-//            try {
-//                communicate.send(request);
-//            } catch (SocketException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        catch (WrongCommandInputException exception){
+            } else throw new WrongCommandInputException();
+        } catch (WrongCommandInputException exception) {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (NumberFormatException exception){
+        } catch (NumberFormatException exception) {
             ConsoleClient.printError("Значением поля должно являться число!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (NoSuchElementException exception){
+        } catch (NoSuchElementException exception) {
             ConsoleClient.printError("Значение поля не распознано!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
         } catch (IllegalStateException exception) {
@@ -74,7 +58,7 @@ public class RemoveGreater extends AbstractCommand {
         return false;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "remove_any_by_semester_enum semesterEnum - Удалит из коллекции один элемент, значение поля semesterEnum которого эквивалентно заданному";
     }
 }

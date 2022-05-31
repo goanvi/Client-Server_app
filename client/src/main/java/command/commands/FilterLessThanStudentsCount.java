@@ -1,6 +1,5 @@
 package command.commands;
 
-import client.Client;
 import client.Communicate;
 import command.AbstractCommand;
 import command.exceptions.WrongCommandInputException;
@@ -10,7 +9,6 @@ import request.Request;
 import response.Response;
 import utility.Asker;
 
-import java.net.SocketException;
 import java.util.NoSuchElementException;
 
 public class FilterLessThanStudentsCount extends AbstractCommand {
@@ -31,26 +29,17 @@ public class FilterLessThanStudentsCount extends AbstractCommand {
                 request = new Request(null, "filter_less_than_students_count", Integer.toString(input));
                 communicate.send(request);
                 Response response = communicate.get();
-                ConsoleClient.println("\n"+response.getText());
+                ConsoleClient.println("\n" + response.getText());
                 return response.getAnswer();
             } else throw new WrongCommandInputException();
-        }
-//        catch (SocketException exception){
-//            Client.waitingConnection();
-//            try {
-//                communicate.send(request);
-//            } catch (SocketException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        catch (WrongCommandInputException exception) {
+        } catch (WrongCommandInputException exception) {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (NumberFormatException exception){
+        } catch (NumberFormatException exception) {
             ConsoleClient.printError("Значением поля должно являться число!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (NoSuchElementException exception){
+        } catch (NoSuchElementException exception) {
             ConsoleClient.printError("Значение поля не распознано!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
         } catch (IllegalStateException exception) {

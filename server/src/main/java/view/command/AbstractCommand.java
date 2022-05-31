@@ -4,7 +4,7 @@ public abstract class AbstractCommand implements Command {
     private final String name;
     private final String description;
 
-    public AbstractCommand(String name, String description){
+    public AbstractCommand(String name, String description) {
         this.description = description;
         this.name = name;
     }
@@ -26,7 +26,7 @@ public abstract class AbstractCommand implements Command {
 
     @Override
     public int hashCode() {
-        return name.hashCode()+ description.hashCode();
+        return name.hashCode() + description.hashCode();
     }
 
     @Override

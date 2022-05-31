@@ -26,12 +26,6 @@ public class ExecuteScript extends AbstractCommand {
         File file;
         try {
             if (!argument.isEmpty()) {
-//                ConsoleClient.println("Введите путь к файлу!");
-////                if (Asker.getFileMode()) {
-////                    Scanner scriptScanner = ConsoleClient.getScriptScanner();
-////                    file = scriptScanner.nextLine().trim();
-////                }else file = scanner.nextLine().trim();
-//                input = consoleClient.readLine();
                 file = new File(argument.trim());
                 if (consoleClient.getFiles().contains(file.getAbsolutePath())) throw new ScriptLoopingException();
                 consoleClient.getFiles().add(file.getAbsolutePath());
@@ -39,18 +33,18 @@ public class ExecuteScript extends AbstractCommand {
                 ConsoleClient.println("Скрипт из файла " + consoleClient.getFiles().getLast() + " успешно выполнен!");
                 consoleClient.getFiles().removeLast();
                 return true;
-            }else throw new WrongCommandInputException();
-        }catch (FileNotFoundException exception){
+            } else throw new WrongCommandInputException();
+        } catch (FileNotFoundException exception) {
             ConsoleClient.printError("Файл не найден!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (ScriptLoopingException exception){
+        } catch (ScriptLoopingException exception) {
             ConsoleClient.printError("Зацикливание скрипта!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (WrongCommandInputException exception) {
+        } catch (WrongCommandInputException exception) {
             ConsoleClient.printError("Команда " + getName() + " введена с ошибкой: " +
                     "команда не должна содержать символы после своего названия!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
-        }catch (NoSuchElementException exception){
+        } catch (NoSuchElementException exception) {
             ConsoleClient.printError("Значение поля не распознано!");
             if (Asker.getFileMode()) throw new IncorrectScriptException();
         } catch (IllegalStateException exception) {
@@ -60,7 +54,7 @@ public class ExecuteScript extends AbstractCommand {
         return false;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "execute_script file_name - Считает и исполнит скрипт из указанного файла";
     }
 }

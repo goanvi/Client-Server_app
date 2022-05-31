@@ -1,4 +1,3 @@
-
 package view.command.commands;
 
 import controller.CommandManager;
@@ -16,13 +15,13 @@ public class Help extends AbstractCommand {
     }
 
     @Override
-    public Response execute(Request request){
+    public Response execute(Request request) {
         StringBuilder stringBuilder = new StringBuilder();
-            commandManager.getCommands().forEach((key,value) -> stringBuilder.append(key).append("  -  ").append(value.getDescription()).append("\n"));
-            return new Response(true,stringBuilder + "\n" +"Справка по командам успешно выведена");
+        commandManager.getCommands().forEach((key, value) -> stringBuilder.append(key).append("  -  ").append(value.getDescription()).append("\n"));
+        return new Response(true, stringBuilder + "\n" + "Справка по командам успешно выведена");
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return "help - Выводит информацию по доступным командам";
     }
 }

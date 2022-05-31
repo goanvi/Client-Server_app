@@ -24,16 +24,16 @@ public class ServerExit extends AbstractCommand {
     public Response execute(Request request) {
         try {
             fileWorker.writer(ParserCSV.toCSV(collectionManager.getCollection()));
-            if (Connect.getSocket()!=null) Connect.close();
+            if (Connect.getSocket() != null) Connect.close();
             System.exit(0);
             return null;
 
-        }catch (SecurityException exception){
+        } catch (SecurityException exception) {
             System.out.println("Ошибка прав доступа к файлу!");
-            return new Response(false,"Ошибка прав доступа к файлу!");
-        }catch (IOException exception){
+            return new Response(false, "Ошибка прав доступа к файлу!");
+        } catch (IOException exception) {
             System.out.println("Не удалось сохранить данные в файл!");
-            return new Response(false,"Не удалось сохранить данные в файл!");
+            return new Response(false, "Не удалось сохранить данные в файл!");
         }
     }
 }

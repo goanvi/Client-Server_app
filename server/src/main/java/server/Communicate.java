@@ -12,7 +12,7 @@ public class Communicate {
     ObjectInput ois;
     ObjectOutputStream oos;
 
-    public Communicate (SocketChannel socket) {
+    public Communicate(SocketChannel socket) {
         this.socket = socket;
         try {
             oos = new ObjectOutputStream(socket.socket().getOutputStream());
@@ -26,27 +26,15 @@ public class Communicate {
         }
     }
 
-    public Request getRequest (){
-//        ByteBuffer buf = ByteBuffer.allocate(10000);
+    public Request getRequest() {
         Request request = null;
         try {
-//            buf.clear();
-//            socket.read(buf);
-//            System.out.println(buf);
-//            byte[] buffer = new byte[buf.position()];
-//            buf.flip();
-//            System.out.println(buf);
-//            for (int i = 0; i<buffer.length; i++){
-//                buffer[i] = buf.get();
-//            }
-//            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buf.array());
-//            ObjectInput ois = new ObjectInputStream(socket.socket().getInputStream());
             request = (Request) ois.readObject();
-        }catch (SocketException e){
+        } catch (SocketException e) {
 
-        }catch (EOFException ex){
+        } catch (EOFException ex) {
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("ioe");
 //            e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -55,11 +43,8 @@ public class Communicate {
         return request;
     }
 
-    public void sendResponse(Response response){
-//        ByteBuffer buf = ByteBuffer.allocate(1000);
+    public void sendResponse(Response response) {
         try {
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream(1000);
-//            ObjectOutputStream oos = new ObjectOutputStream(socket.socket().getOutputStream());
             oos.writeObject(response);
             oos.flush();
         } catch (IOException e) {

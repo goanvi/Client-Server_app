@@ -1,4 +1,4 @@
 package view.command.exceptions;
 
-public class WrongCommandInputException extends Exception{
+public class WrongCommandInputException extends Exception {
 }

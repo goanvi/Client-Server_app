@@ -1,6 +1,6 @@
 package exceptions;
 
-public class IncorrectScriptException extends Exception{
+public class IncorrectScriptException extends Exception {
 
     @Override
     public String getMessage() {

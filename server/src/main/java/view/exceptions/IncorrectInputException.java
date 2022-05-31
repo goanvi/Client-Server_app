@@ -1,4 +1,4 @@
 package view.exceptions;
 
-public class IncorrectInputException extends Exception{
+public class IncorrectInputException extends Exception {
 }
